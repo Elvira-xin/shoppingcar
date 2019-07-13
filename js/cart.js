@@ -43,5 +43,6 @@ $(()=>{
           $('.empty-tip').hide();
           $('.total-of').removeClass('hidden')
         });
+        
     }
 })
