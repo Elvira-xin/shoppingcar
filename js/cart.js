@@ -105,6 +105,9 @@ $(() => {
                 }
             }
         })
+
+        
+
     })
 
     //实现全选框
@@ -133,7 +136,7 @@ $(() => {
         })
         obj.number = oldVal;
         let jsonStr = JSON.stringify(arr);
-        localStorage.setItem('shopCartDate', jsonStr);
+        localStorage.setItem('shopCartData', jsonStr);
         computedCountAndMoney();
         $(this).parents('.item').find('.computed').text(obj.number * obj.price)
     })
@@ -153,7 +156,7 @@ $(() => {
         })
         obj.number = oldVal;
         let jsonStr = JSON.stringify(arr);
-        localStorage.setItem('shopCartDate', jsonStr);
+        localStorage.setItem('shopCartData', jsonStr);
         computedCountAndMoney();
         $(this).parents('.item').find('.computed').text(obj.number * obj.price)
     })
