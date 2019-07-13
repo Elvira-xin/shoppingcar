@@ -30,4 +30,9 @@ $(function(){
         }
         chooseNumber.val(old)
     })
+
+    $('.addshopcar').on('click',function(){
+        let number=parseInt($('.choose-number').val());
+        let jsonStr=localStorage.getItem('shopCartData');
+    })
 })

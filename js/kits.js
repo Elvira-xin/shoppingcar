@@ -40,3 +40,16 @@ function total(){
   });
   return total;
 }
+
+
+var kits={};
+kits.loadArray=function(key){
+  let str=localStorage.getItem(key);
+  let arr;
+  if(str===null){
+    arr=[];
+  }else{
+    arr=JSON.parse(str)
+  }
+  return arr;
+}
