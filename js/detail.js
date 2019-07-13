@@ -35,29 +35,29 @@ $(function () {
         let number = parseInt($('.choose-number').val());
         let jsonStr = localStorage.getItem('shopCartData');
         let arr;
-        if(jsonStr!==null){
-            arr=[]
-        }else{
-            arr=JSON.parse(jsonStr)
+        if (jsonStr == null) {
+            arr = []
+        } else {
+            arr = JSON.parse(jsonStr)
         }
-        let isExit=arr.find(e=>{
-            return e.pID===id;
+        let isExit = arr.find(e => {
+            return e.pID === id;
         })
-        if(isExit!==undefined){
-            isExit+=number;
-        }else{
-            let good={
-                pID:obj.pID,
-                name:obj.name,
-                price:obj.price,
-                imgSrc:obj.imgSrc,
-                number:obj.number
+        if (isExit !== undefined) {
+            isExit.number += number;
+        } else {
+            let good = {
+                pID: obj.pID,
+                name: obj.name,
+                price: obj.price,
+                imgSrc: obj.imgSrc,
+                number: number
             }
             arr.push(good)
         }
-        jsonStr=JSON.stringify(arr);
-        localStorage.setItem('shopCartData',jsonStr);
-        location.href='cart.html';
+        jsonStr = JSON.stringify(arr);
+        localStorage.setItem('shopCartData', jsonStr);
+        location.href = 'cart.html';
     })
-    
+
 })
