@@ -105,4 +105,16 @@ $(() => {
             }
         })
     })
+
+    //实现全选框
+    $('.pick-all').on('click',function(){
+        let status=$(this).prop('checked');
+        $('.item-ck').prop('checked',status);
+        $('.pick-all').prop('checked',status);
+        computedCountAndMoney();
+    })
+    $('.item-ck').on('click',function(){
+        $('.pick-all').prop('checked',$('.item-ck').length===$('.item-ck:checked').length);
+        computedCountAndMoney();
+    })
 })
