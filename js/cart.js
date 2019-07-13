@@ -44,6 +44,7 @@ $(() => {
         $('.total-of').removeClass('hidden');
         $('.cart-header').removeClass('hidden')
     }
+    //计算总数量和总金额    
     function computedCountAndMoney() {
         let totalCount = 0;
         let totalMoney = 0;
@@ -107,14 +108,53 @@ $(() => {
     })
 
     //实现全选框
-    $('.pick-all').on('click',function(){
-        let status=$(this).prop('checked');
-        $('.item-ck').prop('checked',status);
-        $('.pick-all').prop('checked',status);
+    $('.pick-all').on('click', function () {
+        let status = $(this).prop('checked');
+        $('.item-ck').prop('checked', status);
+        $('.pick-all').prop('checked', status);
         computedCountAndMoney();
     })
-    $('.item-ck').on('click',function(){
-        $('.pick-all').prop('checked',$('.item-ck').length===$('.item-ck:checked').length);
+    $('.item-ck').on('click', function () {
+        $('.pick-all').prop('checked', $('.item-ck').length === $('.item-ck:checked').length);
         computedCountAndMoney();
+    })
+
+    //使用委托实现加减
+    $('.item-list').on('click', '.add', function () {
+        let oldVal = parseInt($(this).siblings('input').val())
+        oldVal++;
+        if (oldVal >=1) {
+            $(this).siblings('.reduce').removeClass('disabled')
+        }
+        $(this).siblings('input').val(oldVal)
+        let id = parseInt($(this).parents('.item').attr('data-id'));
+        let obj = arr.find(e => {
+            return e.pID === id;
+        })
+        obj.number = oldVal;
+        let jsonStr = JSON.stringify(arr);
+        localStorage.setItem('shopCartDate', jsonStr);
+        computedCountAndMoney();
+        $(this).parents('.item').find('.computed').text(obj.number * obj.price)
+    })
+    $('.item-list').on('click', '.reduce', function () {
+        let oldVal = parseInt($(this).siblings('input').val());
+        if (oldVal === 1) {
+            return;
+        }
+        oldVal--;
+        if (oldVal === 1) {
+            $(this).addClass('disabled')
+        }
+        $(this).siblings('input').val(oldVal)
+        let id = parseInt($(this).parents('.item').attr('data-id'));
+        let obj = arr.find(e => {
+            return e.pID === id;
+        })
+        obj.number = oldVal;
+        let jsonStr = JSON.stringify(arr);
+        localStorage.setItem('shopCartDate', jsonStr);
+        computedCountAndMoney();
+        $(this).parents('.item').find('.computed').text(obj.number * obj.price)
     })
 })
